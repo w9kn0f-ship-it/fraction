@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>달콤 디저트 카페: 분수 파티</title>
     <style>
-        /* 가독성 높고 귀여운 느낌의 프리텐다드 웹폰트 */
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        /* 🌟 디저트 카페에 어울리는 귀여운 눈누 둥근 글씨체 적용 */
+        @import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2004@1.0/MaplestoryOTFLight.woff');
+        @import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/CookieRun-Regular.woff');
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif !important;
+            font-family: 'CookieRun-Regular', 'MaplestoryOTFLight', cursive, sans-serif !important;
             user-select: none;
         }
 
@@ -525,7 +526,7 @@
         }
 
         .btn-next {
-            background: linear-gradient(135deg, #fb7185, #e11d48);
+            background: linear-gradient(135deg, #fb7185, #ff758f);
             border: none;
             color: white;
             font-weight: bold;
@@ -533,7 +534,7 @@
             border-radius: 12px;
             font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.25);
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.25);
         }
 
         .btn-next:disabled, .btn-hint:disabled, .btn-submit:disabled {
@@ -836,7 +837,6 @@
         let selectedDessert = dessertPool[0];
         let inventory = [];
 
-        // 총 60문항의 알찬 분수 수학 문제 세트
         const mathQuizData = [
             { num: 16, numr: 3, den: 4, answer: 12, hint: "16의 1/4은 4입니다. 여기에 3을 곱해보세요." },
             { num: 20, numr: 2, den: 5, answer: 8, hint: "20의 1/5은 4입니다. 여기에 2를 곱해보세요." },
