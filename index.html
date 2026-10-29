@@ -428,7 +428,7 @@
             color: #be123c;
         }
 
-        /* 💖 입력창 및 찌름 방지 제출 버튼 완벽 정돈 스타일 */
+        /* 💖 '정답 제출' 버튼과 입력창 전체 잘림 방지 완벽 정돈 스타일 */
         .answer-input-box {
             display: flex;
             gap: 10px;
@@ -452,7 +452,7 @@
             border-color: #e11d48;
         }
 
-        /* 숫자 입력 필드 기본 위아래 화살표(스핀 버튼) 깔끔하게 숨기기 */
+        /* 숫자 입력 필드 기본 위아래 스핀 버튼 숨기기 */
         .answer-input::-webkit-outer-spin-button,
         .answer-input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -463,9 +463,9 @@
             background: linear-gradient(135deg, #fb7185, #e11d48);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px 18px;
             border-radius: 16px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
@@ -700,7 +700,7 @@
     </div>
 
     <div class="container">
-        <header>
+        header>
             <h1 id="cafeTitle">💖 OOO의 달콤 디저트 카페</h1>
             <p>분수 수학 문제를 풀고 맛있는 디저트를 15단계로 완성해 보세요!</p>
         </header>
@@ -783,10 +783,10 @@
                     <div class="explanation-desc" id="explanationDesc"></div>
                 </div>
 
-                <!-- 주관식 입력 폼 (플레이스홀더 및 버튼 찌름 문제 완벽 해결) -->
+                <!-- 주관식 입력 폼 (💖 정답 제출 버튼 선명하게 배치) -->
                 <div class="answer-input-box" id="answerInputBox">
                     <input type="number" id="userAnswerInput" class="answer-input" placeholder="정답 입력" onkeydown="if(event.key==='Enter') submitAnswer()">
-                    <button class="btn-submit" onclick="submitAnswer()">💖 정답</button>
+                    <button class="btn-submit" onclick="submitAnswer()">💖 정답 제출</button>
                 </div>
 
                 <div class="quiz-footer">
