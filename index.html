@@ -132,4 +132,1113 @@
             overflow: hidden;
         }
 
-        .zoo-stage-header
+        .zoo-stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .zoo-stage-title {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 6px 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #be123c;
+        }
+
+        .total-pet-count {
+            background: #ffffff;
+            color: #be123c;
+            padding: 6px 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .zoo-stage-animals {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+            min-height: 70px;
+            padding: 0 10px;
+            overflow-x: auto;
+        }
+
+        .zoo-stage-pet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .zoo-stage-pet-avatar {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+        }
+
+        .zoo-stage-pet-name {
+            font-size: 12px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e293b;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* 메인 구조 */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media(max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.08);
+            border: 2px solid #ffe4e6;
+            position: relative;
+        }
+
+        .card-title {
+            font-weight: 800;
+            color: #be123c;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* 왼쪽 무대 */
+        .pet-stage {
+            position: relative;
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border-radius: 20px;
+            border: 2px dashed #fda4af;
+            height: 230px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .bg-heart-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-bg-heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.35);
+            font-size: 24px;
+            animation: floatUp 3s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(220px) scale(0.8); opacity: 0; }
+            50% { opacity: 0.9; }
+            100% { transform: translateY(-20px) scale(1.2); opacity: 0; }
+        }
+
+        .assembled-pet-box {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .assembled-pet-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+            animation: dessertFloat 2s infinite ease-in-out;
+        }
+
+        @keyframes dessertFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
+        }
+
+        .huge-heart-badge {
+            position: absolute;
+            bottom: 10px;
+            background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 3;
+        }
+
+        .pet-info {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .pet-name-text {
+            font-size: 20px;
+            font-weight: 800;
+            color: #334155;
+        }
+
+        .pet-status-text {
+            font-size: 15px;
+            color: #e11d48;
+            margin-top: 3px;
+            font-weight: 700;
+        }
+
+        /* 하트 게이지바 */
+        .heart-gauge-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: #fff5f5;
+            padding: 10px;
+            border-radius: 14px;
+            border: 1px solid #fecdd3;
+            margin-bottom: 6px;
+        }
+
+        .heart-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .gauge-heart {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .gauge-heart.filled {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+            transform: scale(1.1);
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #64748b;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        /* 오른쪽 퀴즈 카드 및 통계 현황판 */
+        .quiz-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: #e11d48;
+            margin-bottom: 10px;
+        }
+
+        /* 통계 현황판 */
+        .quiz-stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            background: #fff1f2;
+            padding: 10px;
+            border-radius: 14px;
+            border: 2px solid #fecdd3;
+            margin-bottom: 14px;
+            font-size: 13px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stat-total { color: #475569; }
+        .stat-correct { color: #16a34a; }
+        .stat-wrong { color: #dc2626; }
+        .stat-val { font-size: 16px; }
+
+        /* 교과서 스타일 분수 문제 박스 */
+        .quiz-question {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            min-height: 70px;
+            background: #fff1f2;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px dashed #fda4af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* 세로 분수 표기 스타일 */
+        .fraction-display {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            font-size: 22px;
+            line-height: 1;
+            padding: 0 4px;
+        }
+
+        .fraction-numerator {
+            border-bottom: 2.5px solid #be123c;
+            padding-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: #be123c;
+        }
+
+        .fraction-denominator {
+            padding-top: 2px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: #be123c;
+        }
+
+        /* 입력창 및 제출 버튼 */
+        .answer-input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .answer-input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 14px;
+            border: 2px solid #cbd5e1;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            outline: none;
+            text-align: center;
+        }
+
+        .answer-input:focus {
+            border-color: #e11d48;
+        }
+
+        .answer-input::-webkit-outer-spin-button,
+        .answer-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #fb7185, #e11d48);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.1s ease;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.96);
+        }
+
+        .hint-box, .warning-box, .explanation-box {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hint-box {
+            background: #fef9c3;
+            border: 2px solid #fde047;
+            color: #854d0e;
+        }
+
+        .warning-box {
+            background: #fee2e2;
+            border: 2px solid #fca5a5;
+            color: #991b1b;
+        }
+
+        .explanation-box {
+            background: #fff1f2;
+            border: 2px solid #fda4af;
+            color: #9f1239;
+        }
+
+        .explanation-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #e11d48;
+            margin-bottom: 4px;
+        }
+
+        .explanation-desc {
+            font-size: 14.5px;
+            color: #475569;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-hint {
+            background: #fef9c3;
+            border: 2px solid #fde047;
+            color: #854d0e;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #fb7185, #e11d48);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.25);
+        }
+
+        .btn-next:disabled, .btn-hint:disabled, .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 강화 연출 오버레이 */
+        .quiz-enhance-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .quiz-enhance-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .enhance-heart-icon {
+            font-size: 70px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-enhance-overlay.processing .enhance-heart-icon {
+            animation: enhanceSpin 1s infinite linear;
+        }
+
+        .quiz-enhance-overlay.success .enhance-heart-icon {
+            animation: enhanceSuccessGlow 0.6s infinite alternate;
+            filter: drop-shadow(0 0 30px #e11d48);
+            transform: scale(1.3);
+        }
+
+        .quiz-enhance-overlay.fail .enhance-heart-icon {
+            animation: enhanceFailBreak 0.5s ease forwards;
+            filter: grayscale(1) drop-shadow(0 0 10px #000);
+        }
+
+        @keyframes enhanceSpin {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        @keyframes enhanceSuccessGlow {
+            0% { transform: scale(1.2); }
+            100% { transform: scale(1.4); }
+        }
+
+        @keyframes enhanceFailBreak {
+            0% { transform: scale(1) rotate(0deg); }
+            20% { transform: scale(1.2) rotate(-10deg); }
+            40% { transform: scale(0.9) rotate(10deg); }
+            100% { transform: scale(0.7) rotate(20deg); opacity: 0.5; }
+        }
+
+        .enhance-status-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #e11d48;
+            margin-bottom: 6px;
+        }
+
+        .enhance-status-sub {
+            font-size: 16px;
+            color: #64748b;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        /* 하단 인벤토리 */
+        .inventory-card { margin-top: 10px; }
+
+        .inventory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .inventory-content {
+            background: #fff1f2;
+            border: 2px dashed #fda4af;
+            border-radius: 18px;
+            padding: 18px;
+            min-height: 90px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .empty-inventory {
+            font-size: 15px;
+            color: #a0aec0;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .inventory-badge {
+            background: #ffffff;
+            border: 2px solid #fb7185;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-weight: bold;
+            color: #e11d48;
+            box-shadow: 0 2px 6px rgba(225, 29, 72, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .inventory-badge img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 이름 입력 모달 -->
+    <div class="modal-overlay" id="nameModal">
+        <div class="modal-box">
+            <div class="modal-title">🍰 디저트 카페에 오신 것을 환영해요!</div>
+            <div class="modal-desc">파티시에(원장님)의 이름을 적어주세요 💕</div>
+            <input type="text" id="usernameInput" class="modal-input" placeholder="이민형" maxlength="10" onkeydown="if(event.key==='Enter') startCafé()">
+            <button class="modal-btn" onclick="startCafé()">카페 오픈하기 🧁</button>
+        </div>
+    </div>
+
+    <!-- 2. 전체 완성 축하 모달 -->
+    <div class="modal-overlay" id="completionModal" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-title" id="completionTitle">🎉 모든 디저트 완성!</div>
+            <div class="modal-desc" id="completionDesc">환상적인 디저트 쇼케이스를 모두 채웠어요!</div>
+            <button class="modal-btn" onclick="resetAllCafé()">처음부터 다시 만들기 🍰</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 id="cafeTitle">💖 OOO의 달콤 디저트 카페</h1>
+            <p>분수 수학 문제를 풀고 맛있는 디저트를 순서대로 15단계 완성해 보세요!</p>
+        </header>
+
+        <!-- 상단 쇼케이스 무대 -->
+        <section class="zoo-stage-card">
+            <div class="zoo-stage-header">
+                <div class="zoo-stage-title" id="stageTitle">🎂 완성된 디저트 쇼케이스</div>
+                <div class="total-pet-count" id="topTotalCount">모은 디저트 총 0/24개</div>
+            </div>
+            <div class="zoo-stage-animals" id="zooStageAnimals"></div>
+        </section>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <div class="main-grid">
+            <!-- 왼쪽: 디저트 강화 무대 -->
+            <div class="card">
+                <div class="card-title">✨ 디저트 데코 강화 중!</div>
+                
+                <div class="pet-stage" id="petStage">
+                    <div class="bg-heart-container" id="bgHeartContainer"></div>
+                    
+                    <div class="assembled-pet-box" id="dessertEmojiBox">
+                        <img id="dessertImg" src="" alt="디저트">
+                    </div>
+
+                    <div class="huge-heart-badge">
+                        <span>⭐</span> <span id="heartLevelText">1성</span>
+                    </div>
+                </div>
+
+                <div class="pet-info">
+                    <div class="pet-name-text" id="petName">딸기 생크림 케이크</div>
+                    <div class="pet-status-text" id="petStatus">🌱 성공 확률: 95% 데코 강화 도전!</div>
+                </div>
+
+                <!-- 하트 게이지바 -->
+                <div class="heart-gauge-container" id="heartGaugeContainer"></div>
+                <div class="progress-text" id="progressText">1 / 15성 달성</div>
+            </div>
+
+            <!-- 오른쪽: 주관식 수학 퀴즈 영역 -->
+            <div class="card quiz-card">
+                <div class="quiz-enhance-overlay" id="quizEnhanceOverlay">
+                    <div class="enhance-heart-icon" id="enhanceHeartIcon">💖</div>
+                    <div class="enhance-status-title" id="enhanceStatusTitle">데코 강화 진행 중...</div>
+                    <div class="enhance-status-sub" id="enhanceStatusSub">잠시만 기다려 주세요!</div>
+                </div>
+
+                <div class="quiz-header">
+                    <span id="quizNumber">분수 수학 퀴즈 1</span>
+                    <span id="scoreCount">달콤 하트 ❤️ 1개</span>
+                </div>
+
+                <!-- 통계 현황판 -->
+                <div class="quiz-stats-bar">
+                    <div class="stat-item stat-total">
+                        <span>📝 총 푼 문제</span>
+                        <span class="stat-val" id="totalSolvedCount">0</span>
+                    </div>
+                    <div class="stat-item stat-correct">
+                        <span>⭕ 맞은 문제</span>
+                        <span class="stat-val" id="correctSolvedCount">0</span>
+                    </div>
+                    <div class="stat-item stat-wrong">
+                        <span>❌ 틀린 문제</span>
+                        <span class="stat-val" id="wrongSolvedCount">0</span>
+                    </div>
+                </div>
+
+                <!-- 교과서 스타일 분수 문제 박스 -->
+                <div class="quiz-question" id="quizQuestion"></div>
+                
+                <div class="hint-box" id="hintBox"></div>
+                <div class="warning-box" id="warningBox">정답 숫자를 입력해 주세요! ✍️</div>
+                
+                <!-- 오답 해설 박스 -->
+                <div class="explanation-box" id="explanationBox">
+                    <div class="explanation-title" id="explanationTitle">❌ 아쉽게 틀렸어요!</div>
+                    <div class="explanation-desc" id="explanationDesc"></div>
+                </div>
+
+                <!-- 주관식 입력 폼 -->
+                <div class="answer-input-box" id="answerInputBox">
+                    <input type="number" id="userAnswerInput" class="answer-input" placeholder="정답 입력" onkeydown="if(event.key==='Enter') submitAnswer()">
+                    <button class="btn-submit" onclick="submitAnswer()">💖 정답 제출</button>
+                </div>
+
+                <div class="quiz-footer">
+                    <button class="btn-hint" id="hintBtn" onclick="toggleHint()">💡 힌트 보기</button>
+                    <button class="btn-next" id="nextBtn" onclick="nextQuiz()" disabled>다음 문제 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 쇼케이스 인벤토리 -->
+        <section class="card inventory-card">
+            <div class="inventory-header">
+                <div class="card-title" style="margin-bottom:0;">🍰 나의 디저트 쇼케이스 진열대</div>
+                <div class="total-pet-count" id="bottomTotalCount">모은 디저트 총 0/24개</div>
+            </div>
+            <div class="inventory-content" id="inventoryContent">
+                <div class="empty-inventory">아직 완성한 디저트가 없어요. 분수를 풀고 데코를 완성해 보세요! 🧁</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let userName = "이민형";
+        let heartLevel = 1;
+        const maxLevel = 15;
+        let isEnhancing = false;
+        let hasAnsweredCurrent = false;
+
+        let totalSolvedCount = 0;
+        let correctSolvedCount = 0;
+        let wrongSolvedCount = 0;
+        let enhanceSuccessCount = 0;
+        let enhanceFailCount = 0;
+        
+        // 📌 확실하게 검증된 고품질 디저트 아이콘 풀 (순서대로 진행)
+        const dessertPool = [
+            { id: 'cake', name: '딸기 생크림 케이크', img: 'https://cdn-icons-png.flaticon.com/512/3132/3132693.png' },
+            { id: 'cupcake', name: '알록달록 컵케이크', img: 'https://cdn-icons-png.flaticon.com/512/1047/1047501.png' },
+            { id: 'pudding', name: '커스터드 푸딩', img: 'https://cdn-icons-png.flaticon.com/512/3050/3050139.png' },
+            { id: 'donut', name: '달콤 초코 도넛', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081986.png' },
+            { id: 'cookie', name: '바삭 촉촉 쿠키', img: 'https://cdn-icons-png.flaticon.com/512/2619/2619554.png' },
+            { id: 'macaron', name: '프렌치 마카롱', img: 'https://cdn-icons-png.flaticon.com/512/2276/2276931.png' },
+            { id: 'icecream', name: '바닐라 아이스크림', img: 'https://cdn-icons-png.flaticon.com/512/938/938067.png' },
+            { id: 'pancake', name: '메이플 팬케이크', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081962.png' },
+            { id: 'pie', name: '상큼 애플파이', img: 'https://cdn-icons-png.flaticon.com/512/3050/3050125.png' },
+            { id: 'chocolate', name: '수제 초콜릿 바', img: 'https://cdn-icons-png.flaticon.com/512/2276/2276916.png' },
+            { id: 'honey', name: '달콤한 꿀단지', img: 'https://cdn-icons-png.flaticon.com/512/1047/1047530.png' },
+            { id: 'candy', name: '무지개 사탕', img: 'https://cdn-icons-png.flaticon.com/512/1047/1047517.png' },
+            { id: 'tart', name: '블루베리 타르트', img: 'https://cdn-icons-png.flaticon.com/512/3132/3132717.png' },
+            { id: 'eggtart', name: '고소한 에그타르트', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082012.png' },
+            { id: 'waffle', name: '크림 와플', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081997.png' },
+            { id: 'croffle', name: '바삭 크로플', img: 'https://cdn-icons-png.flaticon.com/512/5903/5903770.png' },
+            { id: 'softcream', name: '소프트 아이스크림', img: 'https://cdn-icons-png.flaticon.com/512/3132/3132688.png' },
+            { id: 'parfait', name: '과일 파르페', img: 'https://cdn-icons-png.flaticon.com/512/3050/3050130.png' },
+            { id: 'melonbread', name: '달콤 메론빵', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081980.png' },
+            { id: 'fishbread', name: '따끈한 붕어빵', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081989.png' },
+            { id: 'dango', name: '쫀득한 경단 당고', img: 'https://cdn-icons-png.flaticon.com/512/2854/2854623.png' },
+            { id: 'churros', name: '시나몬 츄러스', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082005.png' },
+            { id: 'creampuff', name: '슈크림 빵', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082030.png' },
+            { id: 'jelly', name: '탱글 과일 젤리', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082039.png' }
+        ];
+        
+        let currentDessertIndex = 0;
+        let selectedDessert = dessertPool[0];
+        let inventory = [];
+
+        // 📌 [구구단 범위 내 엄격 정제] 초등 60문항
+        const mathQuizData = [
+            { num: 81, numr: 8, den: 9, answer: 72, hint: "81 ÷ 9 = 9 이므로, 9 × 8 을 계산하세요." },
+            { num: 81, numr: 2, den: 9, answer: 18, hint: "81 ÷ 9 = 9 이므로, 9 × 2 를 계산하세요." },
+            { num: 81, numr: 5, den: 9, answer: 45, hint: "81 ÷ 9 = 9 이므로, 9 × 5 를 계산하세요." },
+            { num: 72, numr: 7, den: 8, answer: 63, hint: "72 ÷ 8 = 9 이므로, 9 × 7 을 계산하세요." },
+            { num: 72, numr: 4, den: 9, answer: 32, hint: "72 ÷ 9 = 8 이므로, 8 × 4 를 계산하세요." },
+            { num: 64, numr: 3, den: 8, answer: 24, hint: "64 ÷ 8 = 8 이므로, 8 × 3 을 계산하세요." },
+            { num: 63, numr: 5, den: 7, answer: 45, hint: "63 ÷ 7 = 9 이므로, 9 × 5 를 계산하세요." },
+            { num: 63, numr: 2, den: 9, answer: 14, hint: "63 ÷ 9 = 7 이므로, 7 × 2 를 계산하세요." },
+            { num: 56, numr: 3, den: 7, answer: 24, hint: "56 ÷ 7 = 8 이므로, 8 × 3 을 계산하세요." },
+            { num: 56, numr: 5, den: 8, answer: 35, hint: "56 ÷ 8 = 7 이므로, 7 × 5 를 계산하세요." },
+            { num: 54, numr: 4, den: 6, answer: 36, hint: "54 ÷ 6 = 9 이므로, 9 × 4 를 계산하세요." },
+            { num: 54, numr: 7, den: 9, answer: 42, hint: "54 ÷ 9 = 6 이므로, 6 × 7 을 계산하세요." },
+            { num: 49, numr: 4, den: 7, answer: 28, hint: "49 ÷ 7 = 7 이므로, 7 × 4 를 계산하세요." },
+            { num: 48, numr: 5, den: 6, answer: 40, hint: "48 ÷ 6 = 8 이므로, 8 × 5 를 계산하세요." },
+            { num: 48, numr: 3, den: 8, answer: 18, hint: "48 ÷ 8 = 6 이므로, 6 × 3 을 계산하세요." },
+            { num: 45, numr: 3, den: 5, answer: 27, hint: "45 ÷ 5 = 9 이므로, 9 × 3 을 계산하세요." },
+            { num: 45, numr: 4, den: 9, answer: 20, hint: "45 ÷ 9 = 5 이므로, 5 × 4 를 계산하세요." },
+            { num: 42, numr: 5, den: 6, answer: 35, hint: "42 ÷ 6 = 7 이므로, 7 × 5 를 계산하세요." },
+            { num: 42, numr: 4, den: 7, answer: 24, hint: "42 ÷ 7 = 6 이므로, 6 × 4 를 계산하세요." },
+            { num: 40, numr: 3, den: 5, answer: 24, hint: "40 ÷ 5 = 8 이므로, 8 × 3 을 계산하세요." },
+            { num: 40, numr: 7, den: 8, answer: 35, hint: "40 ÷ 8 = 5 이므로, 5 × 7 을 계산하세요." },
+            { num: 36, numr: 3, den: 4, answer: 27, hint: "36 ÷ 4 = 9 이므로, 9 × 3 을 계산하세요." },
+            { num: 36, numr: 5, den: 6, answer: 30, hint: "36 ÷ 6 = 6 이므로, 6 × 5 를 계산하세요." },
+            { num: 36, numr: 4, den: 9, answer: 16, hint: "36 ÷ 9 = 4 이므로, 4 × 4 를 계산하세요." },
+            { num: 35, numr: 3, den: 5, answer: 21, hint: "35 ÷ 5 = 7 이므로, 7 × 3 을 계산하세요." },
+            { num: 35, numr: 4, den: 7, answer: 20, hint: "35 ÷ 7 = 5 이므로, 5 × 4 를 계산하세요." },
+            { num: 32, numr: 3, den: 4, answer: 24, hint: "32 ÷ 4 = 8 이므로, 8 × 3 을 계산하세요." },
+            { num: 32, numr: 5, den: 8, answer: 20, hint: "32 ÷ 8 = 4 이므로, 4 × 5 를 계산하세요." },
+            { num: 30, numr: 2, den: 5, answer: 12, hint: "30 ÷ 5 = 6 이므로, 6 × 2 를 계산하세요." },
+            { num: 30, numr: 5, den: 6, answer: 25, hint: "30 ÷ 6 = 5 이므로, 5 × 5 를 계산하세요." },
+            { num: 28, numr: 3, den: 4, answer: 21, hint: "28 ÷ 4 = 7 이므로, 7 × 3 을 계산하세요." },
+            { num: 28, numr: 5, den: 7, answer: 20, hint: "28 ÷ 7 = 4 이므로, 4 × 5 를 계산하세요." },
+            { num: 27, numr: 2, den: 3, answer: 18, hint: "27 ÷ 3 = 9 이므로, 9 × 2 를 계산하세요." },
+            { num: 27, numr: 5, den: 9, answer: 15, hint: "27 ÷ 9 = 3 이므로, 3 × 5 를 계산하세요." },
+            { num: 25, numr: 3, den: 5, answer: 15, hint: "25 ÷ 5 = 5 이므로, 5 × 3 을 계산하세요." },
+            { num: 24, numr: 2, den: 3, answer: 16, hint: "24 ÷ 3 = 8 이므로, 8 × 2 를 계산하세요." },
+            { num: 24, numr: 3, den: 4, answer: 18, hint: "24 ÷ 4 = 6 이므로, 6 × 3 을 계산하세요." },
+            { num: 24, numr: 5, den: 6, answer: 20, hint: "24 ÷ 6 = 4 이므로, 4 × 5 를 계산하세요." },
+            { num: 24, numr: 7, den: 8, answer: 21, hint: "24 ÷ 8 = 3 이므로, 3 × 7 을 계산하세요." },
+            { num: 21, numr: 2, den: 3, answer: 14, hint: "21 ÷ 3 = 7 이므로, 7 × 2 를 계산하세요." },
+            { num: 21, numr: 4, den: 7, answer: 12, hint: "21 ÷ 7 = 3 이므로, 3 × 4 를 계산하세요." },
+            { num: 20, numr: 3, den: 4, answer: 15, hint: "20 ÷ 4 = 5 이므로, 5 × 3 을 계산하세요." },
+            { num: 20, numr: 2, den: 5, answer: 8, hint: "20 ÷ 5 = 4 이므로, 4 × 2 를 계산하세요." },
+            { num: 18, numr: 2, den: 3, answer: 12, hint: "18 ÷ 3 = 6 이므로, 6 × 2 를 계산하세요." },
+            { num: 18, numr: 5, den: 6, answer: 15, hint: "18 ÷ 6 = 3 이므로, 3 × 5 를 계산하세요." },
+            { num: 18, numr: 4, den: 9, answer: 8, hint: "18 ÷ 9 = 2 이므로, 2 × 4 를 계산하세요." },
+            { num: 16, numr: 3, den: 4, answer: 12, hint: "16 ÷ 4 = 4 이므로, 4 × 3 을 계산하세요." },
+            { num: 16, numr: 5, den: 8, answer: 10, hint: "16 ÷ 8 = 2 이므로, 2 × 5 를 계산하세요." },
+            { num: 15, numr: 2, den: 3, answer: 10, hint: "15 ÷ 3 = 5 이므로, 5 × 2 를 계산하세요." },
+            { num: 15, numr: 4, den: 5, answer: 12, hint: "15 ÷ 5 = 3 이므로, 3 × 4 를 계산하세요." },
+            { num: 14, numr: 3, den: 7, answer: 6, hint: "14 ÷ 7 = 2 이므로, 2 × 3 을 계산하세요." },
+            { num: 12, numr: 2, den: 3, answer: 8, hint: "12 ÷ 3 = 4 이므로, 4 × 2 를 계산하세요." },
+            { num: 12, numr: 3, den: 4, answer: 9, hint: "12 ÷ 4 = 3 이므로, 3 × 3 을 계산하세요." },
+            { num: 12, numr: 5, den: 6, answer: 10, hint: "12 ÷ 6 = 2 이므로, 2 × 5 를 계산하세요." },
+            { num: 10, numr: 3, den: 5, answer: 6, hint: "10 ÷ 5 = 2 이므로, 2 × 3 을 계산하세요." },
+            { num: 9, numr: 2, den: 3, answer: 6, hint: "9 ÷ 3 = 3 이므로, 3 × 2 를 계산하세요." },
+            { num: 8, numr: 3, den: 4, answer: 6, hint: "8 ÷ 4 = 2 이므로, 2 × 3 을 계산하세요." },
+            { num: 6, numr: 2, den: 3, answer: 4, hint: "6 ÷ 3 = 2 이므로, 2 × 2 를 계산하세요." },
+            { num: 16, numr: 7, den: 8, answer: 14, hint: "16 ÷ 8 = 2 이므로, 2 × 7 을 계산하세요." },
+            { num: 81, numr: 7, den: 9, answer: 63, hint: "81 ÷ 9 = 9 이므로, 9 × 7 을 계산하세요." }
+        ];
+
+        let currentQuizIndex = 0;
+
+        function startCafé() {
+            const inputEl = document.getElementById('usernameInput');
+            if (inputEl && inputEl.value.trim() !== "") {
+                userName = inputEl.value.trim();
+            }
+            
+            const modal = document.getElementById('nameModal');
+            if (modal) modal.style.display = 'none';
+
+            const cafeTitleEl = document.getElementById('cafeTitle');
+            if (cafeTitleEl) cafeTitleEl.innerText = `💖 ${userName}의 달콤 디저트 카페`;
+
+            const stageTitleEl = document.getElementById('stageTitle');
+            if (stageTitleEl) stageTitleEl.innerText = `🎂 ${userName} 파티시에의 쇼케이스`;
+            
+            loadCurrentDessert();
+            init();
+        }
+
+        function loadCurrentDessert() {
+            if (currentDessertIndex >= dessertPool.length) {
+                document.getElementById('completionTitle').innerText = "🏆 쇼케이스 만석 달성!";
+                document.getElementById('completionDesc').innerText = `대단해요! ${userName} 파티시에가 24가지 모든 디저트를 완벽하게 진열했어요! 🎉`;
+                document.getElementById('completionModal').style.display = 'flex';
+                return;
+            }
+            selectedDessert = dessertPool[currentDessertIndex];
+            heartLevel = 1;
+            document.getElementById('dessertImg').src = selectedDessert.img;
+            document.getElementById('petName').innerText = selectedDessert.name;
+        }
+
+        function init() {
+            loadQuiz();
+            updateUI();
+            renderCaféStageAndInventory();
+        }
+
+        function loadQuiz() {
+            hasAnsweredCurrent = false;
+            const current = mathQuizData[currentQuizIndex % mathQuizData.length];
+            document.getElementById('quizNumber').innerText = `분수 수학 퀴즈 ${(currentQuizIndex % mathQuizData.length) + 1}`;
+            
+            const questionElement = document.getElementById('quizQuestion');
+            questionElement.innerHTML = `
+                <span>${current.num} 의</span>
+                <div class="fraction-display">
+                    <div class="fraction-numerator">${current.numr}</div>
+                    <div class="fraction-denominator">${current.den}</div>
+                </div>
+                <span>은(는) 얼마일까요?</span>
+            `;
+            
+            const hintBox = document.getElementById('hintBox');
+            hintBox.style.display = 'none';
+            hintBox.innerText = `💡 힌트: ${current.hint}`;
+
+            const warningBox = document.getElementById('warningBox');
+            warningBox.style.display = 'none';
+
+            const explanationBox = document.getElementById('explanationBox');
+            explanationBox.style.display = 'none';
+
+            const inputField = document.getElementById('userAnswerInput');
+            inputField.value = "";
+            inputField.disabled = false;
+            inputField.focus();
+
+            document.getElementById('answerInputBox').style.display = 'flex';
+            document.getElementById('nextBtn').disabled = true;
+            document.getElementById('hintBtn').disabled = false;
+        }
+
+        function submitAnswer() {
+            if (isEnhancing || hasAnsweredCurrent) return;
+            
+            const inputField = document.getElementById('userAnswerInput');
+            const userVal = inputField.value.trim();
+            
+            const warningBox = document.getElementById('warningBox');
+            if (userVal === "") {
+                warningBox.style.display = 'block';
+                return;
+            }
+            warningBox.style.display = 'none';
+            hasAnsweredCurrent = true;
+
+            const current = mathQuizData[currentQuizIndex % mathQuizData.length];
+            totalSolvedCount++;
+
+            inputField.disabled = true;
+            document.getElementById('hintBtn').disabled = true;
+
+            const numericUserAnswer = Number(userVal);
+
+            if (numericUserAnswer === current.answer) {
+                isEnhancing = true;
+                correctSolvedCount++;
+                updateStatsUI();
+
+                const overlay = document.getElementById('quizEnhanceOverlay');
+                const icon = document.getElementById('enhanceHeartIcon');
+                const title = document.getElementById('enhanceStatusTitle');
+                const sub = document.getElementById('enhanceStatusSub');
+
+                const successRate = Math.max(75, Math.round(95 - (heartLevel * 1.2)));
+                const isSuccess = (Math.random() * 100) <= successRate;
+
+                overlay.className = "quiz-enhance-overlay active processing";
+                icon.innerText = "💖";
+                title.innerText = "디저트 데코 강화 중...";
+                sub.innerText = "잠시만 기다려 주세요!";
+
+                setTimeout(() => {
+                    if (isSuccess) {
+                        enhanceSuccessCount++;
+                        overlay.className = "quiz-enhance-overlay active success";
+                        icon.innerText = "🌟";
+                        title.innerText = "SUCCESS! 데코 강화 성공!";
+                        sub.innerText = `✨ 정답! ${successRate}% 확률을 뚫고 데코가 화려해졌어요!`;
+
+                        if (heartLevel < maxLevel) heartLevel++;
+                        
+                        if (heartLevel === maxLevel) {
+                            if (!inventory.some(d => d.id === selectedDessert.id)) {
+                                inventory.push(selectedDessert);
+                            }
+                            renderCaféStageAndInventory();
+                            
+                            setTimeout(() => {
+                                currentDessertIndex++;
+                                if (currentDessertIndex >= dessertPool.length) {
+                                    document.getElementById('completionTitle').innerText = "🏆 쇼케이스 만석 달성!";
+                                    document.getElementById('completionDesc').innerText = `대단해요! ${userName} 파티시에가 24가지 모든 디저트를 완벽하게 진열했어요! 🎉`;
+                                    document.getElementById('completionModal').style.display = 'flex';
+                                } else {
+                                    loadCurrentDessert();
+                                }
+                            }, 500);
+                        }
+                    } else {
+                        enhanceFailCount++;
+                        overlay.className = "quiz-enhance-overlay active fail";
+                        icon.innerText = "💦";
+                        title.innerText = "FAIL! 데코 강화 실패...";
+                        sub.innerText = `🥺 아쉽게도 ${successRate}% 확률에 당첨되지 못했어요!`;
+                    }
+
+                    updateStatsUI();
+
+                    setTimeout(() => {
+                        overlay.className = "quiz-enhance-overlay";
+                        finishAnswerProcess();
+                    }, 1400);
+
+                }, 1000);
+
+            } else {
+                wrongSolvedCount++;
+                updateStatsUI();
+
+                const explanationBox = document.getElementById('explanationBox');
+                document.getElementById('explanationDesc').innerText = `💡 정답은 [ ${current.answer} ] 입니다.\n📌 풀이 팁: ${current.hint}`;
+                explanationBox.style.display = 'block';
+
+                document.getElementById('nextBtn').disabled = false;
+                document.getElementById('hintBtn').disabled = false;
+            }
+        }
+
+        function updateStatsUI() {
+            document.getElementById('totalSolvedCount').innerText = totalSolvedCount;
+            document.getElementById('correctSolvedCount').innerText = correctSolvedCount;
+            document.getElementById('wrongSolvedCount').innerText = wrongSolvedCount;
+        }
+
+        function finishAnswerProcess() {
+            isEnhancing = false;
+            updateUI();
+            
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('hintBtn').disabled = false;
+            
+            currentQuizIndex = Math.floor(Math.random() * mathQuizData.length);
+            loadQuiz();
+        }
+
+        function nextQuiz() {
+            if (isEnhancing) return;
+            
+            if (!hasAnsweredCurrent) {
+                const warningBox = document.getElementById('warningBox');
+                warningBox.style.display = 'block';
+                return;
+            }
+
+            currentQuizIndex = Math.floor(Math.random() * mathQuizData.length);
+            loadQuiz();
+        }
+
+        function toggleHint() {
+            if (isEnhancing) return;
+            const hintBox = document.getElementById('hintBox');
+            if (hintBox.style.display === 'none' || hintBox.style.display === '') {
+                hintBox.style.display = 'block';
+            } else {
+                hintBox.style.display = 'none';
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('heartLevelText').innerText = `${heartLevel}성`;
+            document.getElementById('scoreCount').innerText = `달콤 하트 ❤️ ${heartLevel}개`;
+
+            const successRate = Math.max(75, Math.round(95 - (heartLevel * 1.2)));
+            document.getElementById('petStatus').innerText = `🌱 성공 확률: ${successRate}% 데코 강화 도전!`;
+            document.getElementById('progressText').innerText = `${heartLevel} / ${maxLevel}성 달성`;
+
+            const gaugeContainer = document.getElementById('heartGaugeContainer');
+            gaugeContainer.innerHTML = "";
+            
+            const heartColors = [
+                '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239',
+                '#f59e0b', '#d97706', '#b45309', '#84cc16', '#65a30d',
+                '#06b6d4', '#0284c7', '#2563eb', '#7c3aed', '#db2777'
+            ];
+
+            for (let row = 0; row < 3; row++) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'heart-row';
+                
+                for (let col = 0; col < 5; col++) {
+                    const currentIdx = row * 5 + col + 1;
+                    const heartSpan = document.createElement('span');
+                    heartSpan.className = 'gauge-heart';
+                    
+                    if (currentIdx <= heartLevel) {
+                        heartSpan.classList.add('filled');
+                        heartSpan.innerText = '💖';
+                        heartSpan.style.color = heartColors[currentIdx - 1];
+                    } else {
+                        heartSpan.innerText = '🤍';
+                        heartSpan.style.opacity = '0.4';
+                    }
+                    rowDiv.appendChild(heartSpan);
+                }
+                gaugeContainer.appendChild(rowDiv);
+            }
+
+            const bgContainer = document.getElementById('bgHeartContainer');
+            bgContainer.innerHTML = "";
+            for (let i = 0; i < heartLevel; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-bg-heart';
+                heart.innerText = '✨';
+                heart.style.left = `${Math.random() * 85 + 5}%`;
+                heart.style.animationDuration = `${2 + Math.random() * 2}s`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                bgContainer.appendChild(heart);
+            }
+        }
+
+        function resetAllCafé() {
+            document.getElementById('completionModal').style.display = 'none';
+            inventory = [];
+            currentDessertIndex = 0;
+            loadCurrentDessert();
+            loadQuiz();
+            updateUI();
+            renderCaféStageAndInventory();
+        }
+
+        function renderCaféStageAndInventory() {
+            const stage = document.getElementById('zooStageAnimals');
+            const inventoryContent = document.getElementById('inventoryContent');
+            const countText = `모은 디저트 총 ${inventory.length}/24개`;
+
+            document.getElementById('topTotalCount').innerText = countText;
+            document.getElementById('bottomTotalCount').innerText = countText;
+
+            stage.innerHTML = "";
+            inventoryContent.innerHTML = "";
+
+            if (inventory.length === 0) {
+                inventoryContent.innerHTML = `<div class="empty-inventory">아직 완성한 디저트가 없어요. 분수를 풀고 데코를 완성해 보세요! 🧁</div>`;
+            } else {
+                inventory.forEach(dessert => {
+                    const stageDessert = document.createElement('div');
+                    stageDessert.className = 'zoo-stage-pet';
+                    stageDessert.innerHTML = `
+                        <img class="zoo-stage-pet-avatar" src="${dessert.img}" alt="${dessert.name}">
+                        <div class="zoo-stage-pet-name">${dessert.name}</div>
+                    `;
+                    stage.appendChild(stageDessert);
+
+                    const badge = document.createElement('div');
+                    badge.className = 'inventory-badge';
+                    badge.innerHTML = `<img src="${dessert.img}" alt="${dessert.name}"> 🏆 ${dessert.name} 진열완료!`;
+                    inventoryContent.appendChild(badge);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
