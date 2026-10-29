@@ -337,7 +337,7 @@
             font-weight: bold;
         }
 
-        /* 오른쪽 퀴즈 카드 및 선생님 검사용 통계 현황판 */
+        /* 오른쪽 퀴즈 카드 및 통계 현황판 */
         .quiz-card {
             position: relative;
             overflow: hidden;
@@ -380,7 +380,7 @@
         .stat-wrong { color: #dc2626; }
         .stat-val { font-size: 16px; }
 
-        /* 초등 수학 교과서 스타일 분수 박스 */
+        /* 교과서 스타일 분수 문제 박스 */
         .quiz-question {
             font-size: 24px;
             font-weight: 800;
@@ -717,7 +717,7 @@
                     <div class="pet-status-text" id="petStatus">🌱 성공 확률: 95% 데코 강화 도전!</div>
                 </div>
 
-                <!-- 5-5-5 컬러 하트 게이지바 -->
+                <!-- 하트 게이지바 -->
                 <div class="heart-gauge-container" id="heartGaugeContainer"></div>
                 <div class="progress-text" id="progressText">1 / 15성 달성</div>
             </div>
@@ -795,7 +795,6 @@
         let isEnhancing = false;
         let hasAnsweredCurrent = false;
 
-        // 누적 통계 변수
         let totalSolvedCount = 0;
         let correctSolvedCount = 0;
         let wrongSolvedCount = 0;
@@ -820,7 +819,6 @@
         let selectedDessert = dessertPool[0];
         let inventory = [];
 
-        // 다양한 분자(2, 3, 4 등)가 포함된 분수 문제 세트
         const mathQuizData = [
             { num: 16, numr: 3, den: 4, answer: 12, hint: "16의 1/4은 4입니다. 여기에 3을 곱해보세요." },
             { num: 20, numr: 2, den: 5, answer: 8, hint: "20의 1/5은 4입니다. 여기에 2를 곱해보세요." },
@@ -852,12 +850,19 @@
         let currentQuizIndex = 0;
 
         function startCafé() {
-            const input = document.getElementById('usernameInput').value.trim();
-            if (input !== "") userName = input;
+            const inputEl = document.getElementById('usernameInput');
+            if (inputEl && inputEl.value.trim() !== "") {
+                userName = inputEl.value.trim();
+            }
             
-            document.getElementById('nameModal').style.display = 'none';
-            document.getElementById('cafeTitle').innerText = `💖 ${userName}의 달콤 디저트 카페`;
-            document.getElementById('stageTitle').innerText = `🎂 ${userName} 파티시에의 쇼케이스`;
+            const modal = document.getElementById('nameModal');
+            if (modal) modal.style.display = 'none';
+
+            const cafeTitleEl = document.getElementById('cafeTitle');
+            if (cafeTitleEl) cafeTitleEl.innerText = `💖 ${userName}의 달콤 디저트 카페`;
+
+            const stageTitleEl = document.getElementById('stageTitle');
+            if (stageTitleEl) stageTitleEl.innerText = `🎂 ${userName} 파티시에의 쇼케이스`;
             
             pickRandomDessert();
             init();
@@ -893,7 +898,6 @@
             const current = mathQuizData[currentQuizIndex % mathQuizData.length];
             document.getElementById('quizNumber').innerText = `분수 수학 퀴즈 ${(currentQuizIndex % mathQuizData.length) + 1}`;
             
-            // 교과서형 분수 HTML 렌더링
             const questionElement = document.getElementById('quizQuestion');
             questionElement.innerHTML = `
                 <span>${current.num} 의</span>
@@ -947,7 +951,6 @@
             const numericUserAnswer = Number(userVal);
 
             if (numericUserAnswer === current.answer) {
-                // 정답
                 isEnhancing = true;
                 correctSolvedCount++;
                 updateStatsUI();
@@ -1006,7 +1009,6 @@
                 }, 1000);
 
             } else {
-                // 오답
                 wrongSolvedCount++;
                 updateStatsUI();
 
@@ -1155,6 +1157,7 @@
                     inventoryContent.appendChild(badge);
                 });
             }
-        </script>
+        }
+    </script>
 </body>
 </html>
