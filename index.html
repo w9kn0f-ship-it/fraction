@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>달콤 디저트 카페: 분수 파티</title>
     <style>
+        /* 가독성 높고 귀여운 느낌의 프리텐다드 웹폰트 */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
         * {
@@ -399,7 +400,7 @@
             flex-wrap: wrap;
         }
 
-        /* 진짜 분수 표기 CSS */
+        /* 세로 분수 표기 스타일 */
         .fraction-display {
             display: inline-flex;
             flex-direction: column;
@@ -428,16 +429,17 @@
             color: #be123c;
         }
 
-        /* 주관식 입력 영역 */
+        /* 🌟 주관식 입력 및 정답 제출 버튼 가로 정렬 수정 */
         .answer-input-box {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
+            align-items: center;
         }
 
         .answer-input {
             flex: 1;
-            padding: 14px 18px;
+            padding: 12px 16px;
             border: 2px solid #cbd5e1;
             border-radius: 14px;
             font-size: 20px;
@@ -454,12 +456,15 @@
             background: linear-gradient(135deg, #fb7185, #e11d48);
             color: white;
             border: none;
-            padding: 0 24px;
+            padding: 14px 20px;
             border-radius: 14px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
+            white-space: nowrap; /* 세로로 글자가 깨지는 현상 방지 */
+            min-width: 100px;
+            text-align: center;
         }
 
         .hint-box, .warning-box, .explanation-box {
@@ -680,7 +685,7 @@
     </div>
 
     <div class="container">
-        <header>
+        header>
             <h1 id="cafeTitle">💖 OOO의 달콤 디저트 카페</h1>
             <p>분수 수학 문제를 풀고 맛있는 디저트를 15단계로 완성해 보세요!</p>
         </header>
@@ -689,7 +694,7 @@
         <section class="zoo-stage-card">
             <div class="zoo-stage-header">
                 <div class="zoo-stage-title" id="stageTitle">🎂 완성된 디저트 쇼케이스</div>
-                <div class="total-pet-count" id="topTotalCount">모은 디저트 총 0/12개</div>
+                <div class="total-pet-count" id="topTotalCount">모은 디저트 총 0/24개</div>
             </div>
             <div class="zoo-stage-animals" id="zooStageAnimals"></div>
         </section>
@@ -735,7 +740,7 @@
                     <span id="scoreCount">달콤 하트 ❤️ 1개</span>
                 </div>
 
-                <!-- 📌 [선생님 검사용] 통계 현황판 -->
+                <!-- 통계 현황판 -->
                 <div class="quiz-stats-bar">
                     <div class="stat-item stat-total">
                         <span>📝 총 푼 문제</span>
@@ -765,7 +770,7 @@
 
                 <!-- 주관식 입력 폼 -->
                 <div class="answer-input-box" id="answerInputBox">
-                    <input type="number" id="userAnswerInput" class="answer-input" placeholder="정답 숫자 입력" onkeydown="if(event.key==='Enter') submitAnswer()">
+                    <input type="number" id="userAnswerInput" class="answer-input" placeholder="정답 입력" onkeydown="if(event.key==='Enter') submitAnswer()">
                     <button class="btn-submit" onclick="submitAnswer()">정답 제출</button>
                 </div>
 
@@ -780,7 +785,7 @@
         <section class="card inventory-card">
             <div class="inventory-header">
                 <div class="card-title" style="margin-bottom:0;">🍰 나의 디저트 쇼케이스 진열대</div>
-                <div class="total-pet-count" id="bottomTotalCount">모은 디저트 총 0/12개</div>
+                <div class="total-pet-count" id="bottomTotalCount">모은 디저트 총 0/24개</div>
             </div>
             <div class="inventory-content" id="inventoryContent">
                 <div class="empty-inventory">아직 완성한 디저트가 없어요. 분수를 풀고 데코를 완성해 보세요! 🧁</div>
@@ -801,19 +806,32 @@
         let enhanceSuccessCount = 0;
         let enhanceFailCount = 0;
         
+        // 🌟 디저트 종류를 총 24가지로 두 배 확대!
         const dessertPool = [
             { id: 'cake', name: '딸기 생크림 케이크', emoji: '🎂' },
             { id: 'cupcake', name: '알록달록 컵케이크', emoji: '🧁' },
-            { id: 'pudding', name: '탱글탱글 커스터드 푸딩', emoji: '🍮' },
+            { id: 'pudding', name: '커스터드 푸딩', emoji: '🍮' },
             { id: 'donut', name: '달콤 초코 도넛', emoji: '🍩' },
             { id: 'cookie', name: '바삭 촉촉 쿠키', emoji: '🍪' },
             { id: 'macaron', name: '프렌치 마카롱', emoji: '🍬' },
-            { id: 'icecream', name: '알록달록 아이스크림', emoji: '🍨' },
-            { id: 'pancake', name: '메이플 시럽 팬케이크', emoji: '🥞' },
-            { id: 'pie', name: '상큼 달콤 애플파이', emoji: '🥧' },
-            { id: 'chocolate', name: '달콤한 초콜릿 바', emoji: '🍫' },
+            { id: 'icecream', name: '바닐라 아이스크림', emoji: '🍨' },
+            { id: 'pancake', name: '메이플 팬케이크', emoji: '🥞' },
+            { id: 'pie', name: '상큼 애플파이', emoji: '🥧' },
+            { id: 'chocolate', name: '수제 초콜릿 바', emoji: '🍫' },
             { id: 'honey', name: '달콤한 꿀단지', emoji: '🍯' },
-            { id: 'candy', name: '무지개 사탕', emoji: '🍭' }
+            { id: 'candy', name: '무지개 사탕', emoji: '🍭' },
+            { id: 'tart', name: '블루베리 타르트', emoji: '🥮' },
+            { id: 'eggtart', name: '고소한 에그타르트', emoji: '🧁' },
+            { id: 'waffle', name: '크림 와플', emoji: '🧇' },
+            { id: 'croffle', name: '바삭 크로플', emoji: '🥐' },
+            { id: 'softcream', name: '소프트 아이스크림', emoji: '🍦' },
+            { id: 'parfait', name: '과일 파르페', emoji: '🍧' },
+            { id: 'melonbread', name: '달콤 메론빵', emoji: '🍞' },
+            { id: 'fishbread', name: '따끈한 붕어빵', emoji: '🐟' },
+            { id: 'dango', name: '쫀득한 경단 당고', emoji: '🍡' },
+            { id: 'churros', name: '시나몬 츄러스', emoji: '🥖' },
+            { id: 'creampuff', name: '슈크림 빵', emoji: '🥯' },
+            { id: 'jelly', name: '탱글 과일 젤리', emoji: '🍇' }
         ];
         
         let selectedDessert = dessertPool[0];
@@ -874,7 +892,7 @@
 
             if (remaining.length === 0) {
                 document.getElementById('completionTitle').innerText = "🏆 쇼케이스 만석 달성!";
-                document.getElementById('completionDesc').innerText = `대단해요! ${userName} 파티시에가 12가지 모든 디저트를 완벽하게 진열했어요! 🎉`;
+                document.getElementById('completionDesc').innerText = `대단해요! ${userName} 파티시에가 24가지 모든 디저트를 완벽하게 진열했어요! 🎉`;
                 document.getElementById('completionBtn').innerText = "처음부터 다시 진열하기 🍰";
                 document.getElementById('completionModal').style.display = 'flex';
                 return;
@@ -1131,7 +1149,7 @@
         function renderCaféStageAndInventory() {
             const stage = document.getElementById('zooStageAnimals');
             const inventoryContent = document.getElementById('inventoryContent');
-            const countText = `모은 디저트 총 ${inventory.length}/12개`;
+            const countText = `모은 디저트 총 ${inventory.length}/24개`;
 
             document.getElementById('topTotalCount').innerText = countText;
             document.getElementById('bottomTotalCount').innerText = countText;
