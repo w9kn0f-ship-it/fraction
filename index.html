@@ -428,7 +428,7 @@
             color: #be123c;
         }
 
-        /* 💖 주관식 입력 및 귀여운 하트 정답 제출 버튼 수정 */
+        /* 💖 입력창 및 찌름 방지 제출 버튼 완벽 정돈 스타일 */
         .answer-input-box {
             display: flex;
             gap: 10px;
@@ -438,10 +438,11 @@
 
         .answer-input {
             flex: 1;
-            padding: 14px 16px;
+            min-width: 0;
+            padding: 12px 14px;
             border: 2px solid #cbd5e1;
             border-radius: 16px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             outline: none;
             text-align: center;
@@ -451,21 +452,28 @@
             border-color: #e11d48;
         }
 
+        /* 숫자 입력 필드 기본 위아래 화살표(스핀 버튼) 깔끔하게 숨기기 */
+        .answer-input::-webkit-outer-spin-button,
+        .answer-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         .btn-submit {
             background: linear-gradient(135deg, #fb7185, #e11d48);
             color: white;
             border: none;
-            padding: 14px 22px;
+            padding: 12px 20px;
             border-radius: 16px;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
             white-space: nowrap;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
             flex-shrink: 0;
             transition: transform 0.1s ease;
         }
@@ -775,7 +783,7 @@
                     <div class="explanation-desc" id="explanationDesc"></div>
                 </div>
 
-                <!-- 주관식 입력 폼 (💖 하트 정답 제출 버튼으로 수정) -->
+                <!-- 주관식 입력 폼 (플레이스홀더 및 버튼 찌름 문제 완벽 해결) -->
                 <div class="answer-input-box" id="answerInputBox">
                     <input type="number" id="userAnswerInput" class="answer-input" placeholder="정답 입력" onkeydown="if(event.key==='Enter') submitAnswer()">
                     <button class="btn-submit" onclick="submitAnswer()">💖 정답</button>
