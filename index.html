@@ -429,7 +429,7 @@
             color: #be123c;
         }
 
-        /* 🌟 주관식 입력 및 정답 제출 버튼 가로 정렬 수정 */
+        /* 주관식 입력 및 정답 제출 버튼 가로 정렬 */
         .answer-input-box {
             display: flex;
             gap: 10px;
@@ -462,7 +462,7 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
-            white-space: nowrap; /* 세로로 글자가 깨지는 현상 방지 */
+            white-space: nowrap;
             min-width: 100px;
             text-align: center;
         }
@@ -685,7 +685,7 @@
     </div>
 
     <div class="container">
-        header>
+        <header>
             <h1 id="cafeTitle">💖 OOO의 달콤 디저트 카페</h1>
             <p>분수 수학 문제를 풀고 맛있는 디저트를 15단계로 완성해 보세요!</p>
         </header>
@@ -806,7 +806,6 @@
         let enhanceSuccessCount = 0;
         let enhanceFailCount = 0;
         
-        // 🌟 디저트 종류를 총 24가지로 두 배 확대!
         const dessertPool = [
             { id: 'cake', name: '딸기 생크림 케이크', emoji: '🎂' },
             { id: 'cupcake', name: '알록달록 컵케이크', emoji: '🧁' },
@@ -837,6 +836,7 @@
         let selectedDessert = dessertPool[0];
         let inventory = [];
 
+        // 총 60문항의 알찬 분수 수학 문제 세트
         const mathQuizData = [
             { num: 16, numr: 3, den: 4, answer: 12, hint: "16의 1/4은 4입니다. 여기에 3을 곱해보세요." },
             { num: 20, numr: 2, den: 5, answer: 8, hint: "20의 1/5은 4입니다. 여기에 2를 곱해보세요." },
@@ -862,7 +862,42 @@
             { num: 18, numr: 1, den: 2, answer: 9, hint: "18의 절반을 구해 보세요." },
             { num: 24, numr: 1, den: 3, answer: 8, hint: "24 나누기 3을 해보세요." },
             { num: 30, numr: 2, den: 5, answer: 12, hint: "30의 1/5은 6입니다. 여기에 2를 곱해보세요." },
-            { num: 36, numr: 5, den: 6, answer: 30, hint: "36의 1/6은 6입니다. 여기에 5를 곱해보세요." }
+            { num: 36, numr: 5, den: 6, answer: 30, hint: "36의 1/6은 6입니다. 여기에 5를 곱해보세요." },
+            { num: 12, numr: 3, den: 4, answer: 9, hint: "12의 1/4은 3입니다. 여기에 3을 곱해보세요." },
+            { num: 14, numr: 3, den: 7, answer: 6, hint: "14의 1/7은 2입니다. 여기에 3을 곱해보세요." },
+            { num: 16, numr: 3, den: 8, answer: 6, hint: "16의 1/8은 2입니다. 여기에 3을 곱해보세요." },
+            { num: 22, numr: 2, den: 11, answer: 4, hint: "22의 1/11은 2입니다. 여기에 2를 곱해보세요." },
+            { num: 24, numr: 3, den: 8, answer: 9, hint: "24의 1/8은 3입니다. 여기에 3을 곱해보세요." },
+            { num: 26, numr: 2, den: 13, answer: 4, hint: "26의 1/13은 2입니다. 여기에 2를 곱해보세요." },
+            { num: 33, numr: 2, den: 3, answer: 22, hint: "33의 1/3은 11입니다. 여기에 2를 곱해보세요." },
+            { num: 35, numr: 3, den: 5, answer: 21, hint: "35의 1/5은 7입니다. 여기에 3을 곱해보세요." },
+            { num: 38, numr: 2, den: 19, answer: 4, hint: "38의 1/19은 2입니다. 여기에 2를 곱해보세요." },
+            { num: 39, numr: 2, den: 3, answer: 26, hint: "39의 1/3은 13입니다. 여기에 2를 곱해보세요." },
+            { num: 44, numr: 3, den: 4, answer: 33, hint: "44의 1/4은 11입니다. 여기에 3을 곱해보세요." },
+            { num: 48, numr: 3, den: 8, answer: 18, hint: "48의 1/8은 6입니다. 여기에 3을 곱해보세요." },
+            { num: 51, numr: 2, den: 3, answer: 34, hint: "51의 1/3은 17입니다. 여기에 2를 곱해보세요." },
+            { num: 54, numr: 5, den: 6, answer: 45, hint: "54의 1/6은 9입니다. 여기에 5를 곱해보세요." },
+            { num: 60, numr: 3, den: 5, answer: 36, hint: "60의 1/5은 12입니다. 여기에 3을 곱해보세요." },
+            { num: 10, numr: 3, den: 5, answer: 6, hint: "10의 1/5은 2입니다. 여기에 3을 곱해보세요." },
+            { num: 15, numr: 4, den: 5, answer: 12, hint: "15의 1/5은 3입니다. 여기에 4를 곱해보세요." },
+            { num: 20, numr: 4, den: 5, answer: 16, hint: "20의 1/5은 4입니다. 여기에 4를 곱해보세요." },
+            { num: 25, numr: 4, den: 5, answer: 20, hint: "25의 1/5은 5입니다. 여기에 4를 곱해보세요." },
+            { num: 35, numr: 4, den: 7, answer: 20, hint: "35의 1/7은 5입니다. 여기에 4를 곱해보세요." },
+            { num: 40, numr: 7, den: 8, answer: 35, hint: "40의 1/8은 5입니다. 여기에 7을 곱해보세요." },
+            { num: 45, numr: 4, den: 9, answer: 20, hint: "45의 1/9은 5입니다. 여기에 4를 곱해보세요." },
+            { num: 48, numr: 5, den: 8, answer: 30, hint: "48의 1/8은 6입니다. 여기에 5를 곱해보세요." },
+            { num: 60, numr: 4, den: 5, answer: 48, hint: "60의 1/5은 12입니다. 여기에 4를 곱해보세요." },
+            { num: 72, numr: 7, den: 8, answer: 63, hint: "72의 1/8은 9입니다. 여기에 7을 곱해보세요." },
+            { num: 80, numr: 3, den: 4, answer: 60, hint: "80의 1/4은 20입니다. 여기에 3을 곱해보세요." },
+            { num: 90, numr: 7, den: 9, answer: 70, hint: "90의 1/9은 10입니다. 여기에 7을 곱해보세요." },
+            { num: 100, numr: 3, den: 5, answer: 60, hint: "100의 1/5은 20입니다. 여기에 3을 곱해보세요." },
+            { num: 100, numr: 7, den: 10, answer: 70, hint: "100의 1/10은 10입니다. 여기에 7을 곱해보세요." },
+            { num: 10, numr: 1, den: 2, answer: 5, hint: "10의 절반입니다." },
+            { num: 16, numr: 1, den: 2, answer: 8, hint: "16의 절반입니다." },
+            { num: 22, numr: 1, den: 2, answer: 11, hint: "22의 절반입니다." },
+            { num: 34, numr: 1, den: 2, answer: 17, hint: "34의 절반입니다." },
+            { num: 40, numr: 1, den: 2, answer: 20, hint: "40의 절반입니다." },
+            { num: 50, numr: 1, den: 2, answer: 25, hint: "50의 절반입니다." }
         ];
 
         let currentQuizIndex = 0;
