@@ -175,16 +175,18 @@
         }
 
         .zoo-stage-pet-avatar {
-            font-size: 44px;
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
         }
 
         .zoo-stage-pet-name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             background: rgba(255, 255, 255, 0.95);
             color: #1e293b;
-            padding: 3px 8px;
+            padding: 2px 6px;
             border-radius: 10px;
             margin-top: 2px;
             white-space: nowrap;
@@ -259,13 +261,25 @@
 
         .assembled-pet-box {
             position: relative;
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 75px;
+        }
+
+        .assembled-pet-box img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+            animation: dessertFloat 2s infinite ease-in-out;
+        }
+
+        @keyframes dessertFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
         }
 
         .huge-heart-badge {
@@ -428,7 +442,7 @@
             color: #be123c;
         }
 
-        /* 💖 '정답 제출' 버튼과 입력창 전체 잘림 방지 완벽 정돈 스타일 */
+        /* 💖 입력창 및 버튼 구조 안정화 */
         .answer-input-box {
             display: flex;
             gap: 10px;
@@ -452,7 +466,6 @@
             border-color: #e11d48;
         }
 
-        /* 숫자 입력 필드 기본 위아래 스핀 버튼 숨기기 */
         .answer-input::-webkit-outer-spin-button,
         .answer-input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -463,7 +476,7 @@
             background: linear-gradient(135deg, #fb7185, #e11d48);
             color: white;
             border: none;
-            padding: 12px 18px;
+            padding: 12px 20px;
             border-radius: 16px;
             font-size: 15px;
             font-weight: 800;
@@ -473,7 +486,6 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
             flex-shrink: 0;
             transition: transform 0.1s ease;
         }
@@ -666,15 +678,21 @@
         .inventory-badge {
             background: #ffffff;
             border: 2px solid #fb7185;
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 16px;
             font-weight: bold;
             color: #e11d48;
             box-shadow: 0 2px 6px rgba(225, 29, 72, 0.08);
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 15px;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .inventory-badge img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -690,19 +708,19 @@
         </div>
     </div>
 
-    <!-- 2. 15성 완성 축하 모달 -->
+    <!-- 2. 전체 완성 축하 모달 -->
     <div class="modal-overlay" id="completionModal" style="display: none;">
         <div class="modal-box">
-            <div class="modal-title" id="completionTitle">🎉 디저트 완성!</div>
-            <div class="modal-desc" id="completionDesc">맛있는 디저트가 쇼케이스에 진열되었어요!</div>
-            <button class="modal-btn" onclick="continueCafé()" id="completionBtn">다음 디저트 만들기 🍰</button>
+            <div class="modal-title" id="completionTitle">🎉 모든 디저트 완성!</div>
+            <div class="modal-desc" id="completionDesc">환상적인 디저트 쇼케이스를 모두 채웠어요!</div>
+            <button class="modal-btn" onclick="resetAllCafé()">처음부터 다시 만들기 🍰</button>
         </div>
     </div>
 
     <div class="container">
-        header>
+        <header>
             <h1 id="cafeTitle">💖 OOO의 달콤 디저트 카페</h1>
-            <p>분수 수학 문제를 풀고 맛있는 디저트를 15단계로 완성해 보세요!</p>
+            <p>분수 수학 문제를 풀고 맛있는 디저트를 순서대로 15단계 완성해 보세요!</p>
         </header>
 
         <!-- 상단 쇼케이스 무대 -->
@@ -724,7 +742,7 @@
                     <div class="bg-heart-container" id="bgHeartContainer"></div>
                     
                     <div class="assembled-pet-box" id="dessertEmojiBox">
-                        🧁
+                        <img id="dessertImg" src="" alt="디저트">
                     </div>
 
                     <div class="huge-heart-badge">
@@ -783,7 +801,7 @@
                     <div class="explanation-desc" id="explanationDesc"></div>
                 </div>
 
-                <!-- 주관식 입력 폼 (💖 정답 제출 버튼 선명하게 배치) -->
+                <!-- 주관식 입력 폼 -->
                 <div class="answer-input-box" id="answerInputBox">
                     <input type="number" id="userAnswerInput" class="answer-input" placeholder="정답 입력" onkeydown="if(event.key==='Enter') submitAnswer()">
                     <button class="btn-submit" onclick="submitAnswer()">💖 정답 제출</button>
@@ -821,33 +839,35 @@
         let enhanceSuccessCount = 0;
         let enhanceFailCount = 0;
         
+        // 📌 보기 아름다운 고품질 디저트 일러스트 풀 (순서대로 진행)
         const dessertPool = [
-            { id: 'cake', name: '딸기 생크림 케이크', emoji: '🎂' },
-            { id: 'cupcake', name: '알록달록 컵케이크', emoji: '🧁' },
-            { id: 'pudding', name: '커스터드 푸딩', emoji: '🍮' },
-            { id: 'donut', name: '달콤 초코 도넛', emoji: '🍩' },
-            { id: 'cookie', name: '바삭 촉촉 쿠키', emoji: '🍪' },
-            { id: 'macaron', name: '프렌치 마카롱', emoji: '🍬' },
-            { id: 'icecream', name: '바닐라 아이스크림', emoji: '🍨' },
-            { id: 'pancake', name: '메이플 팬케이크', emoji: '🥞' },
-            { id: 'pie', name: '상큼 애플파이', emoji: '🥧' },
-            { id: 'chocolate', name: '수제 초콜릿 바', emoji: '🍫' },
-            { id: 'honey', name: '달콤한 꿀단지', emoji: '🍯' },
-            { id: 'candy', name: '무지개 사탕', emoji: '🍭' },
-            { id: 'tart', name: '블루베리 타르트', emoji: '🥮' },
-            { id: 'eggtart', name: '고소한 에그타르트', emoji: '🧁' },
-            { id: 'waffle', name: '크림 와플', emoji: '🧇' },
-            { id: 'croffle', name: '바삭 크로플', emoji: '🥐' },
-            { id: 'softcream', name: '소프트 아이스크림', emoji: '🍦' },
-            { id: 'parfait', name: '과일 파르페', emoji: '🍧' },
-            { id: 'melonbread', name: '달콤 메론빵', emoji: '🍞' },
-            { id: 'fishbread', name: '따끈한 붕어빵', emoji: '🐟' },
-            { id: 'dango', name: '쫀득한 경단 당고', emoji: '🍡' },
-            { id: 'churros', name: '시나몬 츄러스', emoji: '🥖' },
-            { id: 'creampuff', name: '슈크림 빵', emoji: '🥯' },
-            { id: 'jelly', name: '탱글 과일 젤리', emoji: '🍇' }
+            { id: 'cake', name: '딸기 생크림 케이크', img: 'https://cdn-icons-png.flaticon.com/512/3132/3132693.png' },
+            { id: 'cupcake', name: '알록달록 컵케이크', img: 'https://cdn-icons-png.flaticon.com/512/1047/1047501.png' },
+            { id: 'pudding', name: '커스터드 푸딩', img: 'https://cdn-icons-png.flaticon.com/512/3050/3050139.png' },
+            { id: 'donut', name: '달콤 초코 도넛', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081986.png' },
+            { id: 'cookie', name: '바삭 촉촉 쿠키', img: 'https://cdn-icons-png.flaticon.com/512/2619/2619554.png' },
+            { id: 'macaron', name: '프렌치 마카롱', img: 'https://cdn-icons-png.flaticon.com/512/2276/2276931.png' },
+            { id: 'icecream', name: '바닐라 아이스크림', img: 'https://cdn-icons-png.flaticon.com/512/938/938067.png' },
+            { id: 'pancake', name: '메이플 팬케이크', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081962.png' },
+            { id: 'pie', name: '상큼 애플파이', img: 'https://cdn-icons-png.flaticon.com/512/3050/3050125.png' },
+            { id: 'chocolate', name: '수제 초콜릿 바', img: 'https://cdn-icons-png.flaticon.com/512/2276/2276916.png' },
+            { id: 'honey', name: '달콤한 꿀단지', img: 'https://cdn-icons-png.flaticon.com/512/1047/1047530.png' },
+            { id: 'candy', name: '무지개 사탕', img: 'https://cdn-icons-png.flaticon.com/512/1047/1047517.png' },
+            { id: 'tart', name: '블루베리 타르트', img: 'https://cdn-icons-png.flaticon.com/512/3132/3132717.png' },
+            { id: 'eggtart', name: '고소한 에그타르트', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082012.png' },
+            { id: 'waffle', name: '크림 와플', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081997.png' },
+            { id: 'croffle', name: '바삭 크로플', img: 'https://cdn-icons-png.flaticon.com/512/5903/5903770.png' },
+            { id: 'softcream', name: '소프트 아이스크림', img: 'https://cdn-icons-png.flaticon.com/512/3132/3132688.png' },
+            { id: 'parfait', name: '과일 파르페', img: 'https://cdn-icons-png.flaticon.com/512/3050/3050130.png' },
+            { id: 'melonbread', name: '달콤 메론빵', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081980.png' },
+            { id: 'fishbread', name: '따끈한 붕어빵', img: 'https://cdn-icons-png.flaticon.com/512/3081/3081989.png' },
+            { id: 'dango', name: '쫀득한 경단 당고', img: 'https://cdn-icons-png.flaticon.com/512/2854/2854623.png' },
+            { id: 'churros', name: '시나몬 츄러스', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082005.png' },
+            { id: 'creampuff', name: '슈크림 빵', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082030.png' },
+            { id: 'jelly', name: '탱글 과일 젤리', img: 'https://cdn-icons-png.flaticon.com/512/3082/3082039.png' }
         ];
         
+        let currentDessertIndex = 0;
         let selectedDessert = dessertPool[0];
         let inventory = [];
 
@@ -932,26 +952,20 @@
             const stageTitleEl = document.getElementById('stageTitle');
             if (stageTitleEl) stageTitleEl.innerText = `🎂 ${userName} 파티시에의 쇼케이스`;
             
-            pickRandomDessert();
+            loadCurrentDessert();
             init();
         }
 
-        function pickRandomDessert() {
-            const collectedIds = inventory.map(d => d.id);
-            const remaining = dessertPool.filter(d => !collectedIds.includes(d.id));
-
-            if (remaining.length === 0) {
+        function loadCurrentDessert() {
+            if (currentDessertIndex >= dessertPool.length) {
                 document.getElementById('completionTitle').innerText = "🏆 쇼케이스 만석 달성!";
                 document.getElementById('completionDesc').innerText = `대단해요! ${userName} 파티시에가 24가지 모든 디저트를 완벽하게 진열했어요! 🎉`;
-                document.getElementById('completionBtn').innerText = "처음부터 다시 진열하기 🍰";
                 document.getElementById('completionModal').style.display = 'flex';
                 return;
             }
-
-            const randomIndex = Math.floor(Math.random() * remaining.length);
-            selectedDessert = remaining[randomIndex];
+            selectedDessert = dessertPool[currentDessertIndex];
             heartLevel = 1;
-            document.getElementById('dessertEmojiBox').innerText = selectedDessert.emoji;
+            document.getElementById('dessertImg').src = selectedDessert.img;
             document.getElementById('petName').innerText = selectedDessert.name;
         }
 
@@ -1053,10 +1067,14 @@
                             renderCaféStageAndInventory();
                             
                             setTimeout(() => {
-                                document.getElementById('completionTitle').innerText = "🎉 15성 디저트 완성!";
-                                document.getElementById('completionDesc').innerText = `🍰 축하합니다! ${selectedDessert.name}이(가) 15성 데코를 완성하여 ${userName} 파티시에의 쇼케이스에 진열되었어요!`;
-                                document.getElementById('completionBtn').innerText = "다음 디저트 만들기 🍰";
-                                document.getElementById('completionModal').style.display = 'flex';
+                                currentDessertIndex++;
+                                if (currentDessertIndex >= dessertPool.length) {
+                                    document.getElementById('completionTitle').innerText = "🏆 쇼케이스 만석 달성!";
+                                    document.getElementById('completionDesc').innerText = `대단해요! ${userName} 파티시에가 24가지 모든 디저트를 완벽하게 진열했어요! 🎉`;
+                                    document.getElementById('completionModal').style.display = 'flex';
+                                } else {
+                                    loadCurrentDessert();
+                                }
                             }, 500);
                         }
                     } else {
@@ -1181,16 +1199,11 @@
             }
         }
 
-        function continueCafé() {
+        function resetAllCafé() {
             document.getElementById('completionModal').style.display = 'none';
-            
-            const collectedIds = inventory.map(d => d.id);
-            const remaining = dessertPool.filter(d => !collectedIds.includes(d.id));
-            if (remaining.length === 0) {
-                inventory = [];
-            }
-
-            pickRandomDessert();
+            inventory = [];
+            currentDessertIndex = 0;
+            loadCurrentDessert();
             loadQuiz();
             updateUI();
             renderCaféStageAndInventory();
@@ -1214,14 +1227,14 @@
                     const stageDessert = document.createElement('div');
                     stageDessert.className = 'zoo-stage-pet';
                     stageDessert.innerHTML = `
-                        <div class="zoo-stage-pet-avatar">${dessert.emoji}</div>
+                        <img class="zoo-stage-pet-avatar" src="${dessert.img}" alt="${dessert.name}">
                         <div class="zoo-stage-pet-name">${dessert.name}</div>
                     `;
                     stage.appendChild(stageDessert);
 
                     const badge = document.createElement('div');
                     badge.className = 'inventory-badge';
-                    badge.innerText = `🏆 ${dessert.emoji} ${dessert.name} 진열완료!`;
+                    badge.innerHTML = `<img src="${dessert.img}" alt="${dessert.name}"> 🏆 ${dessert.name} 진열완료!`;
                     inventoryContent.appendChild(badge);
                 });
             }
